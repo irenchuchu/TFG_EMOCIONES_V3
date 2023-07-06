@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRUEBA APP TFG</title>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+</head>
+<body>
+<div class="card">
+    <div class="card-body">
+        <h6> Mis datos del formulario: </h6>
+
+         {{#each folder}}
+               <div class="w-100"><a class="subfolder">Fecha: {{this.formatDate}}</a></div>
+               <a class="subfolder">Horas de descanso: {{this.hours}}</a>
+               <br>
+               <a class="subfolder">Nivel de energía: {{this.energy_level}}</a>
+               <br>
+               <a class="subfolder">Estado de ánimo: {{this.mood}}</a>
+               <br>
+                <a class="subfolder">Estado de ánimo después del ejercicio: {{this.mood_after}}</a>
+               <br>
+               <a class="subfolder">Estado de concentración: {{this.concentration}}</a>
+               <br>
+               <a class="subfolder">Estado de concentración después del ejercicio: {{this.concentration_after}}</a>
+               <br>
+        {{/each}}
+</div>
+
+<div id="myDiv" style="width: 1000px; height: 1000px;"></div>
+<div id="myDiv1" style="width: 1000px; height: 1000px;"></div>
+
+<script>
+
+function makeplot() {
+/*  console.log('folder makeplot data', this)
+
+  var u = document.getElementById('fileID')
+  var data1_path_before_muse = ''
+  if(u.originalname.includes('before_muse'))
+    data1_path_before_muse = u.destination*/
+/*
+  var myFile = this.file = [
+    {
+      originalName: 'prueba_after_muse.csv',
+      path: 'x',
+      filename: 'y'
+    },
+    {
+      originalName: 'prueba_before_muse.csv',
+      path: 'x',
+      filename: 'y'
+    },
+    {
+      originalName: 'prueba_after_empatica.csv',
+      path: 'x',
+      fileName: 'y'
+    },
+    {
+      originalName: 'prueba_before_empatica.csv',
+      path: 'x',
+      filename: 'y'
+    }
+  ]
+
+  var fileName_before = ''
+  var fileName_after = ''
+  /* for(var i=0; i<myFile.length; i++) {
+    if(myFile[i].originalName.includes('_before_muse'))
+      fileName_before = myFile[i].fileName
+    else if(myFile[i].originalName.includes('_after_muse'))
+      fileName_after = myFile[i].fileName
+  } */
+
+  var userEmail = this.email;
+  var folderDate = this.date;
+
+  console.log('userEmail', userEmail)
+
+  var data1, data2;
+
+  //subir fichero de antes
+  d3.csv(`../uploads/${userEmail}/${folderDate}/${fileName_before}`, function(data){ 
+    data1 = data;
+
+      //subir fichero después
+      d3.csv(`../uploads/${userEmail}/${folderDate}/${fileName_after}`, function(data){ 
+        data2 = data;
+        processData(data1, data2);
+      });
+
+    });
+
+};
+
+function processData(allRows1, allRows2) {
+  console.log('folder processData', this.folder)
+
+  console.log('allRows1processData', allRows1);
+  console.log('allRows2processData', allRows2);
+  var x = [], y0 = [], y1 = [], y2 = [], y3 = [];
+  var y4 = [], y5 = [], y6 = [], y7 = [];
+  //fichero antes
+  for (var i=0; i<allRows1.length; i++) {
+    row = allRows1[i];
+    //x.push( row['TimeStamp'] );
+    y0.push( row['Gamma_TP9'] );
+    y1.push( row['Gamma_TP10'] );
+    y2.push( row['Gamma_AF7'] );
+    y3.push( row['Gamma_AF8'] );
+  }
+
+  //fichero después
+  for (var i=0; i<allRows2.length; i++) {
+    row = allRows2[i];
+    //x.push( row['TimeStamp'] );
+    y4.push( row['Gamma_TP9'] );
+    y5.push( row['Gamma_TP10'] );
+    y6.push( row['Gamma_AF7'] );
+    y7.push( row['Gamma_AF8'] );
+  }
+  
+  makePlotly(y0, y4, y1, y5, y2, y6, y3, y7);
+}
+
+function makePlotly(y0, y1, y2, y3, y4, y5, y6, y7){
+  var plotDiv = document.getElementById("myDiv");
+
+  var trace0= {
+    y: y0,
+    type: 'box',
+    name: "Antes",
+    marker: {color: "#389fe8"}
+
+  };
+
+   var trace1 = {
+    y: y1,
+    type: 'box',
+    name: "Después",
+    marker: {color: "#fcb43f"}
+
+  };
+
+  var trace2 = {
+    y: y2,
+    type: 'box',
+    showlegend: false,
+    text: "Gamma TP10 Antes"
+    marker: {color: "#389fe8"}
+
+  };
+
+  var trace3 = {
+    y: y3,
+    type: 'box',
+    showlegend: false,
+    text: "Gamma TP10 Después",
+    marker: {color: "#fcb43f"}
+
+  };
+
+   var trace4 = {
+    y: y4,
+    type: 'box',
+    showlegend: false,
+    text: "Gamma AF7 Antes",
+    marker: {color: "#389fe8"}
+
+  };
+
+   var trace5 = {
+    y: y5,
+    type: 'box',
+    showlegend: false,
+    text: "Gamma AF7 Después",
+    marker: {color: "#fcb43f"}
+
+  };
+
+   var trace6 = {
+    y: y6,
+    type: 'box',
+    showlegend: false,
+    text: "Gamma AF8 Antes",
+    marker: {color: "#389fe8"}
+
+  };
+
+   var trace7 = {
+    y: y7,
+    type: 'box',
+    showlegend: false,
+    text: "Gamma AF8 Después",
+    marker: {color: "#fcb43f"}
+
+  };
+
+  var data = [hola, trace1, trace2, trace3, trace4, trace5, trace6, trace7];
+
+  var layout = {
+  title: 'Gráfica ONDAS GAMMA', // Título de la gráfica
+  xaxis: {
+    title: 'Eje X', // Título del eje X
+  },
+  yaxis: {
+    title: 'Eje Y', // Título del eje Y
+  },
+  legend: {
+    // Configuración de la leyenda
+    x: 0.5, // Posición horizontal de la leyenda
+    y: 1.1, // Posición vertical de la leyenda
+    bgcolor: 'white', // Color de fondo de la leyenda
+    bordercolor: 'black', // Color del borde de la leyenda
+    borderwidth: 1, // Ancho del borde de la leyenda
+  },
+};
+
+Plotly.newPlot(plotDiv, data, layout);
+
+ 
+};
+  makeplot();
+</script>
+
+<script>
+
+  ///////////////////////////////////////////segunda gráfica///////////////////////////////////////
+function makeplot1() {
+  
+  var data1, data2;
+  //subir fichero de antes
+  d3.csv("../uploads/mariomallorca09@hotmail.commindMonitor_2021-10-05--18-35-59.csv", function(data){ 
+    data1 = data;
+
+      //subir fichero después
+      d3.csv("../uploads/mariomallorca09@hotmail.commindMonitor_2021-10-05--18-35-59.csv", function(data){ 
+        data2 = data;
+        processData1(data1, data2);
+        
+      } );
+
+    } );
+
+};
+
+function processData1(allRows1, allRows2) {
+  
+  console.log('allRows1', allRows1);
+  console.log('allRows2', allRows2);
+  var x = [], y0 = [], y1 = [], y2 = [], y3 = [];
+  var y4 = [], y5 = [], y6 = [], y7 = [];
+  //fichero antes
+  for (var i=0; i<allRows1.length; i++) {
+    row = allRows1[i];
+    //x.push( row['TimeStamp'] );
+    y0.push( row['Alpha_TP9'] );
+    y1.push( row['Alpha_TP10'] );
+    y2.push( row['Alpha_AF7'] );
+    y3.push( row['Alpha_AF8'] );
+  }
+
+  //fichero después
+  for (var i=0; i<allRows2.length; i++) {
+    row = allRows2[i];
+    //x.push( row['TimeStamp'] );
+    y4.push( row['Alpha_TP9'] );
+    y5.push( row['Alpha_TP10'] );
+    y6.push( row['Alpha_AF7'] );
+    y7.push( row['Alpha_AF8'] );
+  }
+  
+  makePlotly1(y0, y4, y1, y5, y2, y6, y3, y7);
+}
+
+function makePlotly1(y0, y1, y2, y3, y4, y5, y6, y7){
+  var plotDiv1 = document.getElementById("myDiv1");
+
+  var hola= {
+    y: y0,
+    type: 'box',
+    marker: {color: "#389fe8"}
+
+  };
+
+   var trace1 = {
+    y: y1,
+    type: 'box',
+    marker: {color: "#fcb43f"}
+
+  };
+
+  var trace2 = {
+    y: y2,
+    type: 'box',
+    marker: {color: "#389fe8"}
+
+  };
+
+  var trace3 = {
+    y: y3,
+    type: 'box',
+    marker: {color: "#fcb43f"}
+
+  };
+
+   var trace4 = {
+    y: y4,
+    type: 'box',
+    marker: {color: "#389fe8"}
+
+  };
+
+   var trace5 = {
+    y: y5,
+    type: 'box',
+    marker: {color: "#fcb43f"}
+
+  };
+
+   var trace6 = {
+    y: y6,
+    type: 'box',
+    marker: {color: "#389fe8"}
+
+  };
+
+   var trace7 = {
+    y: y7,
+    type: 'box',
+    marker: {color: "#fcb43f"}
+
+  };
+
+  var data = [hola, trace1, trace2, trace3, trace4, trace5, trace6, trace7];
+
+  Plotly.newPlot(plotDiv1, data, 
+    {title: 'Gráfica ONDAS ALPHA'});
+};
+  makeplot1();
+
+
+</script>
+
+</body>
+
+
+

@@ -1,0 +1,82 @@
+
+{{!-- <nav class="menu">
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+  </div>
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Inicio</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {{#if user}} <!-- para cuando SI exista el usuario-->
+            <li class="nav-item dropdown">
+              <!--<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="/panel">
+                MI CUENTA
+              </a>-->
+               <a class="nav-link  active" href="/panel">Mi Panel</a></li>
+               <a class="nav-link" href="/panel">Mis datos</a></li>
+               <a class="nav-link" href="/users/logout">Cerrar Sesión</a></li>
+               <a class="nav-link" href="/about">Análisis</a></li>
+            </li>
+          {{else}} <!-- para cuando NO exista el usuario-->
+            <li class="nav-item">
+              <a class="nav-link active" href="/users/signin">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/signup">Registrate</a>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+  </ul>
+</nav>
+<header class="banner">
+  <div class="banner-content">
+    <h1>Mi Sitio Web</h1>
+    <p>Bienvenido a mi página principal</p>
+    <span class="animated-text">Lets do some sport</span>
+  </div>
+</header> --}}
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Emotion Detector</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" href="/">Inicio</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          {{#if user}} <!-- para cuando SI exista el usuario-->
+            <li class="nav-item dropdown">
+              <!--<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" href="/panel">
+                MI CUENTA
+              </a>-->
+               <a class="nav-link  active" href="/panel">Mi Panel</a></li>
+               <a class="nav-link" href="/panel">Mis datos</a></li>
+               <a class="nav-link" href="/users/logout">Cerrar Sesión</a></li>
+               <a class="nav-link" href="/about">Análisis</a></li>
+            </li>
+          {{else}} <!-- para cuando NO exista el usuario-->
+            <li class="nav-item">
+              <a class="nav-link active" href="/users/signin">Iniciar Sesión</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/users/signup">Registrate</a>
+            </li>
+          {{/if}}
+        </ul>
+      </div>
+   </div>
+  </div>
+</nav> 

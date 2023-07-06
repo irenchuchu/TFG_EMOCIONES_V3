@@ -1,0 +1,78 @@
+{{#each errors}}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{text}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+{{/each}}
+
+
+<form action="/training" method="post" enctype="multipart/form-data">
+   <!--
+   
+    <div class="form-group">
+    <label for="date">Fecha:</label>
+    <input type="date" name="date" class="form-control" id="date" placeholder="dd/mm/aaaa">
+  </div>-->
+
+  <div class="form-group">
+    <label for="date">Fecha:</label>
+    <input type="text" name="date" class="form-control" id="date" placeholder="dd/mm/aaaa"/>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Horas de sueño (en horas) Ej: 7.5h</label>
+    <input type="number" class="form-control" name="hours"/>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Nivel de energía:</label>
+    <select name="energy_level" class="form-control" id="exampleFormControlSelect1">
+      <option value="0" >Muy perezoso</option>
+      <option value="1">Perezoso</option>
+      <option value="2">Normal</option>
+      <option value="3">Enérgico</option>
+      <option value="4">Muy enérgico</option>
+    </select>
+  </div>
+  
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Estado de ánimo:</label>
+    <select name="mood" class="form-control" id="exampleFormControlSelect1">
+      <option value="0">Muy Negativo</option>
+      <option value="1">Negativo</option>
+      <option value="2">Neutro</option>
+      <option value="3">Positivo</option>
+      <option value="4">Muy positivo</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Estado de concentración:</label>
+    <select name="concentration" class="form-control" id="exampleFormControlSelect1">
+      <option value="0">Muy despistado</option>
+      <option value="1">Despistado</option>
+      <option value="2">Normal</option>
+      <option value="3">Concentrado</option>
+      <option value="4">Muy concentrado</option>
+    </select>
+  </div>
+
+   <div class="form-group">
+    <label for="exampleFormControlTextarea1">ID EMPATICA - ARCHIVO CSV - SIN EJERCICIO</label>
+    <input type = "file" name = "file" class="form-control" accept=".csv" required/>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">ID MUSE - ARCHIVO CSV - SIN EJERCICIO</label>
+      <input type = "file" name = "file" class="form-control" accept=".csv" required/>
+  </div>
+
+   <div class="boton">
+  <button style="background-color: rgb(255, 255, 255); border-color:rgb(255, 255, 255); color: rgb(231, 101, 14)" type="submit" id="submit-file" class="btn btn-primary">Guardar</button>
+  </div>
+
+  <div class="boton1">
+  <a style="background-color: rgb(255, 255, 255); border-color:rgb(255, 255, 255); color: rgb(231, 101, 14)" class="btn btn-primary" href="/panel" >Cancelar</a>
+  </div>
+
+</form>

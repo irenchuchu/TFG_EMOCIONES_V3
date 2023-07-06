@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-body">
+        <h1>Formularios</h1>
+        <a class="boton_form" href="/formulario_entreno">Para los días de entrenamiento</a>
+        <a class="boton_form" href="/formulario_descanso">Para los días de descanso</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h1>Gráficas</h1>
+       
+       
+        {{#each folder}}
+
+                <form action="/analisis/query" method="get">
+                    <input value={{this.date}} name="date" class="invisible"/>
+                    <button type="submit" class="boton_form2">Día {{this.formatDate}}</button>
+                </form> 
+
+                <!--<a class="folder" href="/analisis/">{{this.date}}</a>-->
+                           
+        {{/each}}
+            <a href = "/deleteTraining" > Eliminar </a>
+
+       </div>
+</div>
+<script>
+    
+</script>
